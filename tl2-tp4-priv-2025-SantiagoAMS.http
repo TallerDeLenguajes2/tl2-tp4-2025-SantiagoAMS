@@ -1,0 +1,6 @@
+@tl2_tp4_priv_2025_SantiagoAMS_HostAddress = http://localhost:5125
+
+GET {{tl2_tp4_priv_2025_SantiagoAMS_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
