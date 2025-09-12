@@ -59,7 +59,8 @@ public class AccesoADatosCSV : IAccesoADatos
         }
         catch (Exception e)
         {
-            Utilidades.PrintError($"Error con el archivo \"{nombre}\": "+e.Data);
+
+            //Utilidades.PrintError($"Error con el archivo \"{nombre}\": "+e.Data);
         }
         return null;
     }
@@ -72,7 +73,8 @@ public class AccesoADatosCSV : IAccesoADatos
             var t = File.ReadAllLines(nombre);
             if (t == null)
             {
-                Utilidades.PrintError($"El archivo \"{nombre}\" esta vacio");
+
+                //Utilidades.PrintError($"El archivo \"{nombre}\" esta vacio");
                 return null;
             }
             foreach (var line in t)
@@ -83,7 +85,7 @@ public class AccesoADatosCSV : IAccesoADatos
         }
         catch
         {
-            Utilidades.PrintError($"Error con el archivo \"{nombre}\"");
+            //Utilidades.PrintError($"Error con el archivo \"{nombre}\"");
             return ret;
         }
         return ret;

@@ -129,6 +129,14 @@ public class Cadeteria
         return c == null ? 0 : _listadoPedidos.Count(p => p.Estado == e && p.EstaAsignado(c));
     }
     ///
+
+    public string ListarPedidos()
+    {
+        StringBuilder s = new();
+        s.Append(ListarPedidosSinAsignar());
+        s.Append(ListarPedidosAsignados());
+        return s.ToString();
+    }
     public string ListarPedidosAsignados(EstadoPedido? estado = null, bool nombreCadete = true)
     {
         StringBuilder s = new();
