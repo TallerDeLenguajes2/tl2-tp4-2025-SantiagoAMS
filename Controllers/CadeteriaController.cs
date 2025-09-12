@@ -1,3 +1,4 @@
+using Cadeteria;
 using Microsoft.AspNetCore.Mvc;
 
 namespace tl2_tp4_2025_SantiagoAMS.Controllers;
@@ -30,21 +31,33 @@ public class CadeteriaController : ControllerBase
     [HttpGet("GetInforme")]
     public ActionResult GetInforme()
     {
-        return Ok(Cadeteria.Cadeteria.Instance.ListarCadetes());
+        return Ok(Cadeteria.Cadeteria.Instance.ResumenJornada());
     }
 
     [HttpGet("AgregarPedido")]
-    public ActionResult AgregarPedido()
+    public ActionResult AgregarPedido(string nombreCliente, string telefonoCliente, string direccion, string detalleDomicilio, string observacionPedido)
     {
-        return Ok(Cadeteria.Cadeteria.Instance.ListarCadetes());
+        var r = Cadeteria.Cadeteria.Instance.AgregarPedido(nombreCliente, telefonoCliente, direccion, detalleDomicilio, observacionPedido);
+        return Ok(r);
     }
     [HttpGet("AsignarPedido")]
-    public ActionResult AsignarPedido()
+    public ActionResult AsignarPedido(int idPedido, int idCadete)
     {
-        return Ok(Cadeteria.Cadeteria.Instance.ListarCadetes());
+        var p = Cadeteria.Cadeteria.Instance.ObtenerPedido(idPedido);
+        if (p == null)
+        {
+            return BadRequest("Unexisting pedido");
+        }
+        var c = Cadeteria.Cadeteria.Instance.ObtenerCadete(idCadete);
+        if (c == null)
+        {
+            return BadRequest("Unexisting Cadete");
+        }
+        p.Asignar(c);
+        return Ok();
     }
     [HttpGet("CambiarEstadoPedido")]
-    public ActionResult CambiarEstadoPedido()
+    public ActionResult CambiarEstadoPedido(int idPedido)
     {
         return Ok(Cadeteria.Cadeteria.Instance.ListarCadetes());
     }

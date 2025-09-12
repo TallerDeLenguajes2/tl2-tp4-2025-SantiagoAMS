@@ -92,9 +92,17 @@ public class Cadeteria
     /////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////// PEDIDOS
 
-    public void AgregarPedido(Pedido p)
+    public int AgregarPedido(Pedido p)
     {
         _listadoPedidos.Add(p);
+        return p.Nro;
+    }
+
+    public int AgregarPedido(string nombre, string telefono, string direccion, string referencia, string observacion)
+    {
+        var p = new Pedido(new Cliente(nombre, direccion, telefono, referencia), observacion);
+        _listadoPedidos.Add(p);
+        return p.Nro;
     }
 
     public Pedido ObtenerPedido(int num)
@@ -102,6 +110,10 @@ public class Cadeteria
         return _listadoPedidos.FirstOrDefault(p => p.Nro == num);
     }
 
+    public int ContarPedidos()
+    {
+        return _listadoPedidos.Count();
+    }
     public int ContarPedidos(int idCadete)
     {
         return _listadoPedidos.Count(p => p.EstaAsignado(idCadete));
