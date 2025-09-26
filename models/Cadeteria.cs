@@ -1,22 +1,20 @@
 using System.Text;
 
-namespace Cadeteria;
+namespace CadeteriaNS;
 
 public class Cadeteria
 {
-    public static readonly Cadeteria Instance = new Cadeteria("","");
+    public static readonly Cadeteria Instance = AccesoADatosCadeteria.Instance.Obtener();
     public const int JORNAL_POR_ENTREGA = 500; // De momento queda fijo en 500
     public string Nombre { get; set; }
     public string Telefono { get; set; }
-    private List<Cadete> _listadoCadetes;
-    private List<Pedido> _listadoPedidos;
+    private List<Cadete> _listadoCadetes { get { return AccesoADatosCadetes.Instance.Obtener(); } }
+    private List<Pedido> _listadoPedidos { get { return AccesoADatosPedidos.Instance.Obtener(); } }
 
     public Cadeteria(string nombre, string telefono)
     {
         this.Nombre = nombre;
         this.Telefono = telefono;
-        this._listadoCadetes = [];
-        this._listadoPedidos = [];
     }
 
     public string ResumenJornada()

@@ -1,8 +1,8 @@
-using Cadeteria;
+using CadeteriaNS;
 
 public interface IAccesoADatos
 {
     public List<Pedido> CargaPedidos(string ruta);
     public List<Cadete> CargaCadetes(string ruta);
-    public Cadeteria.Cadeteria CargaCadeteria(string ruta);
+    public CadeteriaNS.Cadeteria CargaCadeteria(string ruta);
 }

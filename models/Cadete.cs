@@ -1,4 +1,4 @@
-namespace Cadeteria;
+namespace CadeteriaNS;
 
 public class Cadete
 {

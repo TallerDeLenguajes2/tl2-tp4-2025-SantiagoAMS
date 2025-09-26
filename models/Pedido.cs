@@ -1,6 +1,6 @@
 using System.Text;
 
-namespace Cadeteria;
+namespace CadeteriaNS;
 
 public enum EstadoPedido
 {
