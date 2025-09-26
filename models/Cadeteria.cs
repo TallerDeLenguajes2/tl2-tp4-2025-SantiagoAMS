@@ -5,21 +5,23 @@ namespace CadeteriaNS;
 public class Cadeteria
 {
     public static readonly Cadeteria Instance = AccesoADatosCadeteria.Instance.Obtener();
-    public const int JORNAL_POR_ENTREGA = 500; // De momento queda fijo en 500
+    public readonly int JORNAL_POR_ENTREGA = 500;
     public string Nombre { get; set; }
     public string Telefono { get; set; }
-    private List<Cadete> _listadoCadetes { get { return AccesoADatosCadetes.Instance.Obtener(); } }
-    private List<Pedido> _listadoPedidos { get { return AccesoADatosPedidos.Instance.Obtener(); } }
+    private List<Cadete> _listadoCadetes;
+    private List<Pedido> _listadoPedidos;
 
     public Cadeteria(string nombre, string telefono)
     {
         this.Nombre = nombre;
         this.Telefono = telefono;
+        _listadoCadetes = [];
+        _listadoPedidos = [];
     }
 
     public string ResumenJornada()
     {
-        
+
         var c = ContarPedidosPorEstado(EstadoPedido.Entregado);
         var prom = (double)(c / CantidadCadetes());
         var jorn = TotalJornales();
@@ -40,6 +42,13 @@ public class Cadeteria
     public void AgregarCadete(Cadete c)
     {
         _listadoCadetes.Add(c);
+    }
+    public void AgregarCadetes(List<Cadete> cadetes)
+    {
+        foreach (var c in cadetes)
+        {
+            _listadoCadetes.Add(c);
+        }
     }
 
     public int CantidadCadetes()
@@ -96,11 +105,18 @@ public class Cadeteria
         return p.Nro;
     }
 
-    public int AgregarPedido(string nombre, string telefono, string direccion, string referencia, string observacion)
+    public void AgregarPedidos(List<Pedido> pedidos)
+    {
+        foreach (var p in pedidos)
+        {
+            _listadoPedidos.Add(p);
+        }
+    }
+    public Pedido AgregarPedido(string nombre, string telefono, string direccion, string referencia, string observacion)
     {
         var p = new Pedido(new Cliente(nombre, direccion, telefono, referencia), observacion);
         _listadoPedidos.Add(p);
-        return p.Nro;
+        return p;
     }
 
     public Pedido ObtenerPedido(int num)
@@ -169,6 +185,10 @@ public class Cadeteria
             s.Append(p.Listar());
         }
         return s.ToString();
+    }
+
+    public void GuardarPedidos(){
+        AccesoADatosPedidos.Instance.Guardar(_listadoPedidos);
     }
     
 }

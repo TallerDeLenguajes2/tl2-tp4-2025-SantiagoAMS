@@ -9,58 +9,63 @@ public class CadeteriaController : ControllerBase
 {
     public CadeteriaController()
     {
-        
+        Cadeteria.Instance.AgregarCadetes(AccesoADatosCadetes.Instance.Obtener());
+        Cadeteria.Instance.AgregarPedidos(AccesoADatosPedidos.Instance.Obtener());
     }
 
     [HttpGet("GetPedidos")]
     public ActionResult GetPedidos()
     {
-        return Ok(CadeteriaNS.Cadeteria.Instance.ListarPedidos());
+        return Ok(Cadeteria.Instance.ListarPedidos());
     }
 
     [HttpGet("GetCadetes")]
     public ActionResult GetCadetes()
     {
-        return Ok(CadeteriaNS.Cadeteria.Instance.ListarCadetes());
+        return Ok(Cadeteria.Instance.ListarCadetes());
     }
 
     [HttpGet("GetInforme")]
     public ActionResult GetInforme()
     {
-        return Ok(CadeteriaNS.Cadeteria.Instance.ResumenJornada());
+        return Ok(Cadeteria.Instance.ResumenJornada());
     }
 
     [HttpGet("AgregarPedido")]
     public ActionResult AgregarPedido(string nombreCliente, string telefonoCliente, string direccion, string detalleDomicilio, string observacionPedido)
     {
-        var r = CadeteriaNS.Cadeteria.Instance.AgregarPedido(nombreCliente, telefonoCliente, direccion, detalleDomicilio, observacionPedido);
+        var r = Cadeteria.Instance.AgregarPedido(nombreCliente, telefonoCliente, direccion, detalleDomicilio, observacionPedido);
+        Cadeteria.Instance.GuardarPedidos();
         return Ok(r);
     }
     [HttpGet("AsignarPedido")]
     public ActionResult AsignarPedido(int idPedido, int idCadete)
     {
-        var p = CadeteriaNS.Cadeteria.Instance.ObtenerPedido(idPedido);
+        var p = Cadeteria.Instance.ObtenerPedido(idPedido);
         if (p == null)
         {
             return BadRequest("Unexisting pedido");
         }
-        var c = CadeteriaNS.Cadeteria.Instance.ObtenerCadete(idCadete);
+        var c = Cadeteria.Instance.ObtenerCadete(idCadete);
         if (c == null)
         {
             return BadRequest("Unexisting Cadete");
         }
         p.Asignar(c);
+        Cadeteria.Instance.GuardarPedidos();
+
         return Ok();
     }
     [HttpGet("CambiarEstadoPedido")]
     public ActionResult CambiarEstadoPedido(int idPedido, int estado)
     {
-         var p = CadeteriaNS.Cadeteria.Instance.ObtenerPedido(idPedido);
+         var p = Cadeteria.Instance.ObtenerPedido(idPedido);
         if (p == null)
         {
             return BadRequest("Unexisting pedido");
         }
         p.CambiarEstado((EstadoPedido)estado);
+        Cadeteria.Instance.GuardarPedidos();
         return Ok();
     }
     [HttpGet("CambiarCadetePedido")]

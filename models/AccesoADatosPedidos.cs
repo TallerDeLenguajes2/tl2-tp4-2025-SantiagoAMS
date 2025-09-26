@@ -14,6 +14,7 @@ public class AccesoADatosPedidos
 
     public void Guardar(List<Pedido> pedidos)
     {
-
+        var t = JsonSerializer.Serialize(pedidos);
+        File.WriteAllText(AccesoADatos.archivoPedidos,t);
     }
 }
