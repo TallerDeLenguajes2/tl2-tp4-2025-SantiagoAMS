@@ -59,12 +59,18 @@ public class CadeteriaController : ControllerBase
     [HttpGet("CambiarEstadoPedido")]
     public ActionResult CambiarEstadoPedido(int idPedido)
     {
-        return Ok(Cadeteria.Cadeteria.Instance.ListarCadetes());
+         var p = Cadeteria.Cadeteria.Instance.ObtenerPedido(idPedido);
+        if (p == null)
+        {
+            return BadRequest("Unexisting pedido");
+        }
+        p.CambiarEstado(EstadoPedido.Entregado);
+        return Ok();
     }
     [HttpGet("CambiarCadetePedido")]
-    public ActionResult CambiarCadetePedido()
+    public ActionResult CambiarCadetePedido(int idPedido, int idCadete)
     {
-        return Ok(Cadeteria.Cadeteria.Instance.ListarCadetes());
+        return AsignarPedido(idPedido, idCadete);
     }
 
 }

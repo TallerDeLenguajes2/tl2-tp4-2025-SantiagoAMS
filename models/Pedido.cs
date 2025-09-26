@@ -73,6 +73,10 @@ public class Pedido
         return this.Estado == EstadoPedido.Entregado;
     }
 
+    public void CambiarEstado(EstadoPedido e){
+        this.Estado = e;
+    }
+
     public string VerDireccionCliente()
     {
         return ($" Direccion: \"{Cliente.Direccion}\" Referencia: \"{Cliente.DatosReferenciaDomicilio}\"");
