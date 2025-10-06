@@ -11,6 +11,7 @@ public class CadeteriaController : ControllerBase
     {
         Cadeteria.Instance.AgregarCadetes(AccesoADatosCadetes.Instance.Obtener());
         Cadeteria.Instance.AgregarPedidos(AccesoADatosPedidos.Instance.Obtener());
+        Pedido.IdIncremental = Cadeteria.Instance.ObtenerNroPedidoMaximo()+1;
     }
 
     [HttpGet("GetPedidos")]

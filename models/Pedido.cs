@@ -9,16 +9,22 @@ public enum EstadoPedido
 
 public class Pedido
 {
-    private static int IdIncremental { get; set; }
+    public static int IdIncremental { get; set; }
 
-    public int Nro { get; private set; }
+    public int Nro { get; set; }
     public string Obs { get; private set; }
     public Cliente Cliente { get; private set; }
     public EstadoPedido Estado { get; private set; } = EstadoPedido.Pendiente;
     public int IdCadete { get; private set; } = -1;
     public Cadete Cadete { get { return Cadeteria.Instance.ObtenerCadete(IdCadete); } }
 
-    //              A       B                   C               D                   E                   F             G             H
+    
+
+    public Pedido()
+    {
+        Cliente = new Cliente();
+    }
+
     public Pedido(int n, string obs, string cliNombre, string cliDomicilio, string cliTelefono, string cliObs, int estado, int idCadete)
     {
         Nro = n;

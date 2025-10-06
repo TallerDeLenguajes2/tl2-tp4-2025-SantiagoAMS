@@ -8,8 +8,8 @@ public class AccesoADatosCadeteria
         var text = File.ReadAllText(
             AccesoADatos.archivoCadeteria
         );
-        Console.WriteLine("Cadeteria");
-        Console.WriteLine(text);
+        //Console.WriteLine("Cadeteria");
+        //Console.WriteLine(text);
         return JsonSerializer.Deserialize<CadeteriaNS.Cadeteria>(text);
     }
 

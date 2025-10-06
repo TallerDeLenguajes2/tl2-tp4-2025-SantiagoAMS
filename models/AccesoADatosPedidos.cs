@@ -10,6 +10,7 @@ public class AccesoADatosPedidos
         return JsonSerializer.Deserialize<List<Pedido>>(File.ReadAllText(
             AccesoADatos.archivoPedidos
         ));
+        
     }
 
     public void Guardar(List<Pedido> pedidos)

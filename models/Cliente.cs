@@ -14,5 +14,12 @@ public class Cliente
         Telefono = telefono;
         DatosReferenciaDomicilio = referencia;
     }
+    public Cliente()
+    {
+        Nombre = "";
+        Direccion = "";
+        Telefono = "";
+        DatosReferenciaDomicilio = "";
+    }
 
 }

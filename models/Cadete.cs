@@ -7,6 +7,12 @@ public class Cadete
     public string Direccion { get; set; }
     public string Telefono { get; set; }
 
+    public Cadete()
+    {
+        Nombre = "";
+        Direccion = "";
+        Telefono = "";
+    }
     public Cadete(int id, string nombre, string direccion, string telefono)
     {
         Id = id;
