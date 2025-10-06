@@ -34,9 +34,11 @@ public class CadeteriaController : ControllerBase
     [HttpGet("AgregarPedido")]
     public ActionResult AgregarPedido(string nombreCliente, string telefonoCliente, string direccion, string detalleDomicilio, string observacionPedido)
     {
+        if (string.IsNullOrWhiteSpace(nombreCliente)) return BadRequest("Nombre de cliente invalido");
+
         var r = Cadeteria.Instance.AgregarPedido(nombreCliente, telefonoCliente, direccion, detalleDomicilio, observacionPedido);
         Cadeteria.Instance.GuardarPedidos();
-        return Ok(r);
+        return Created();
     }
     [HttpGet("AsignarPedido")]
     public ActionResult AsignarPedido(int idPedido, int idCadete)

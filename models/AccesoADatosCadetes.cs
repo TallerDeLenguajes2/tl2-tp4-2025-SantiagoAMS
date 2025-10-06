@@ -6,7 +6,10 @@ public class AccesoADatosCadetes
 
     public List<Cadete> Obtener()
     {
-        return JsonSerializer.Deserialize<List<Cadete>>(File.ReadAllText(AccesoADatos.archivoCadetes));
+        var text = File.ReadAllText(AccesoADatos.archivoCadetes);
+        Console.WriteLine("Archivo cadetes:");
+        Console.WriteLine(text);
+        return JsonSerializer.Deserialize<List<Cadete>>(text);
     }
     
 }

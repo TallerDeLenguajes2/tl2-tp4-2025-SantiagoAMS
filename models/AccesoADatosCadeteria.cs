@@ -5,9 +5,12 @@ public class AccesoADatosCadeteria
     public static AccesoADatosCadeteria Instance = new AccesoADatosCadeteria();
 
     public Cadeteria Obtener(){
-        return JsonSerializer.Deserialize<CadeteriaNS.Cadeteria>(File.ReadAllText(
+        var text = File.ReadAllText(
             AccesoADatos.archivoCadeteria
-        ));
+        );
+        Console.WriteLine("Cadeteria");
+        Console.WriteLine(text);
+        return JsonSerializer.Deserialize<CadeteriaNS.Cadeteria>(text);
     }
 
 }

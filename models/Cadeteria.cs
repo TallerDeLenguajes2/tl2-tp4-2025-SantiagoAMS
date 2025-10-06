@@ -5,7 +5,7 @@ namespace CadeteriaNS;
 public class Cadeteria
 {
     public static readonly Cadeteria Instance = AccesoADatosCadeteria.Instance.Obtener();
-    public readonly int JORNAL_POR_ENTREGA = 500;
+    public static readonly int JORNAL_POR_ENTREGA = 500;
     public string Nombre { get; set; }
     public string Telefono { get; set; }
     private List<Cadete> _listadoCadetes;
